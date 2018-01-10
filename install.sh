@@ -44,12 +44,17 @@ echo $STRING5
     password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
     password2=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
+# Install & Start fail2ban (optional)
+# For bannings IP's trying to bruteforce their way in - a security measure
 echo $STRING6
     if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
     cd ~
     sudo aptitude -y install fail2ban
     sudo service fail2ban restart 
     fi
+    
+# Install and Config Uncomplicated FireWall (optional)
+# For limiting which ports are open - a security measure
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
     sudo apt-get install ufw
     sudo ufw default deny incoming
